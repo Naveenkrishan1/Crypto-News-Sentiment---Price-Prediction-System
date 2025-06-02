@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Crypto Price Predictor</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #111;
+      color: #fff;
+      text-align: center;
+      padding: 50px;
+    }
+
+    form {
+      margin: 20px auto;
+      padding: 20px;
+      background: #222;
+      border-radius: 8px;
+      width: 300px;
+    }
+
+    input {
+      padding: 10px;
+      margin: 10px;
+      width: 90%;
+      border: none;
+      border-radius: 5px;
+    }
+
+    input[type="submit"] {
+      background: #28a745;
+      color: #fff;
+      font-weight: bold;
+      cursor: pointer;
+    }
+
+    .output {
+      margin-top: 40px;
+    }
+
+    .output h2 {
+      color: #00ffcc;
+    }
+
+    .news-section {
+      margin-top: 20px;
+      text-align: left;
+      background-color: #1e1e1e;
+      padding: 20px;
+      border-radius: 10px;
+      width: 70%;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .news-section h3 {
+      color: #00d2ff;
+    }
+
+    .news-item {
+      margin-bottom: 15px;
+    }
+
+    .news-date {
+      font-size: 0.9em;
+      color: #aaa;
+    }
+  </style>
+</head>
+<body>
+  <h1>Cryptocurrency Price Prediction NVEK System [Google web scraping]</h1>
+  <form action="/predict" method="POST">
+    <input type="text" name="coin" placeholder="Enter coin symbol (e.g. BTC)" required><br>
+    <input type="date" name="date" required><br>
+    <input type="time" name="time" required><br>
+    <input type="submit" value="Predict">
+  </form>
+
+  {% if predicted_price %}
+  <div class="output">
+    <h2>Prediction for {{ coin }} at {{ date }} {{ time }} (Sri Lanka Time)</h2>
+    <p><strong>Current Price:</strong> ${{ current_price }}</p>
+    <p><strong>Predicted Price:</strong> ${{ predicted_price }}</p>
+    <p><strong>News Effect:</strong> {{ news_effect }}</p>
+    <p><strong>Sentiment Score:</strong> {{ sentiment_score }}</p>
+    <p><strong>Final Prediction:</strong> ${{ final_prediction }}</p>
+  </div>
+
+  <div class="news-section">
+    <h3>Latest News Analyzed:</h3>
+    {% for news in news_items %}
+      <div class="news-item">
+        <strong>{{ news.title }}</strong><br>
+        <span class="news-date">Published on: {{ news.pubDate }}</span>
+      </div>
+    {% endfor %}
+  </div>
+  {% endif %}
+</body>
+</html>
